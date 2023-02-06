@@ -1,0 +1,6 @@
+public class Solution {
+    public int[] Shuffle(int[] nums, int n) => Enumerable
+    .Range(0, 2 * n)
+    .Select(i => nums[i / 2 + i % 2 * n])
+    .ToArray();
+}
