@@ -1,0 +1,29 @@
+public class Solution {
+    public int FindLeastNumOfUniqueInts(int[] arr, int k) {
+        if (arr == null || arr.Length == 0)
+            return 0;
+        
+        Dictionary<int, int> dict = new Dictionary<int, int>();
+        
+        foreach (var item in arr)
+        {
+            if (!dict.ContainsKey(item))
+                dict.Add(item, 0);
+            
+            dict[item] += 1;
+        }
+        
+        int res = dict.Count;
+        
+        foreach (var item in dict.OrderBy(x => x.Value).Select(x => x.Value).ToArray())
+            if (k >= item)
+            {
+                k -= item;
+                res--;
+            }
+            else
+                return res;
+        
+        return res;
+    }
+}
