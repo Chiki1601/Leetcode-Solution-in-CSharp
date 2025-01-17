@@ -1,0 +1,5 @@
+public class Solution {
+    public bool DoesValidArrayExist(int[] derived) {
+        return derived.Aggregate((num1,num2) => num1^num2) == 0; 
+    }
+}
