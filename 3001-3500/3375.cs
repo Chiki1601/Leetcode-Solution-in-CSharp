@@ -1,17 +1,12 @@
-public class Solution
-{
-    public int MinOperations(int[] nums, int k)
-    {
-        int ans = 0;
-        Array.Sort(nums);
-        for (int i = 0; i < nums.Length; i++)
-        {
-            if (nums[i] < k)
-                return -1;
-            if (nums[i] == k || (i != 0 && nums[i] == nums[i - 1]))
-                continue;
-            ans++;
+public class Solution {
+    public int MinOperations(int[] nums, int k) {
+        bool[] used=new bool[101];
+        int distinct=0;
+        for(int i=0; i<nums.Length; i++) {
+            int n=nums[i];
+            if(n<k) return -1;
+            if(n>k && !used[n]) { used[n]=true; distinct++; }
         }
-        return ans;
+        return distinct;
     }
 }
