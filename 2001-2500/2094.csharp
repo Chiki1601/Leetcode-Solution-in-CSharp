@@ -1,0 +1,38 @@
+public class Solution
+{
+    public int[] FindEvenNumbers(int[] digits)
+    {
+        var result = new List<int>();
+        var freq = new int[10];
+
+        foreach (var digit in digits)
+            freq[digit] += 1;
+
+        Search(number: 0);
+        return result.ToArray();
+
+        void Search(int number)
+        {
+            if (number >= 100)
+            {
+                if (int.IsEvenInteger(number))
+                    result.Add(number);
+
+                return;
+            }
+
+            // no leading zeros
+            var first = number == 0 ? 1 : 0;
+
+            for (var digit = first; digit <= 9; digit++)
+            {
+                if (freq[digit] > 0)
+                {
+                    freq[digit] -= 1;
+                    Search(number * 10 + digit);
+                    freq[digit] += 1;
+                }
+            }
+        }
+    }
+}
